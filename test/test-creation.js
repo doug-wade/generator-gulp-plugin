@@ -7,10 +7,13 @@ var path    = require("path");
 
 describe("gulp-plugin generator", function () {
   before(function (done) {
-    helpers.run(path.join(__dirname, "../app"), { tmpdir: true })
+    return helpers.run(path.join(__dirname, "../app"), { tmpdir: true })
       .withPrompts({
         githubUser: "foo",
         pluginName: "blah"
+      })
+      .on("error", function (error) {
+        console.error('error: ', error);
       })
       .on("end", done);
   });
